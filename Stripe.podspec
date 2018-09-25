@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.requires_arc                   = true
   s.platform                       = :ios
   s.ios.deployment_target          = '9.0'
-  s.public_header_files            = 'Stripe/PublicHeaders/*.h'
+  s.public_header_files            = 'Stripe/PublicHeaders/*.h', 'Stripe/*.h'
   s.source_files                   = 'Stripe/PublicHeaders/*.h', 'Stripe/*.{h,m}'
   s.ios.resource_bundle            = { 'Stripe' => 'Stripe/Resources/**/*' }
 end
