@@ -26,7 +26,14 @@
     if (self.autoformattingBehavior == STPFormTextFieldAutoFormattingBehaviorName) {
         NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z]" options:NSRegularExpressionCaseInsensitive error:nil];
         NSArray<NSTextCheckingResult*>* results = [regularExpression matchesInString:string options:NSMatchingReportProgress range: NSMakeRange(0, string.length)];
-        return results.count == 0;
+        if (results.count == 0) {
+            NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+            if ([textField.text isEqualToString:newString]) {
+                return NO;
+            }
+            textField.text = newString;
+        }
+        return NO;
     }
     BOOL insertingIntoEmptyField = (textField.text.length == 0 && range.location == 0 && range.length == 0);
     BOOL hasTextContentType = NO;
