@@ -23,6 +23,11 @@
 @implementation STPTextFieldDelegateProxy
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (self.autoformattingBehavior == STPFormTextFieldAutoFormattingBehaviorName) {
+        NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z]" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSArray<NSTextCheckingResult*>* results = [regularExpression matchesInString:string options:NSMatchingReportProgress range: NSMakeRange(0, string.length)];
+        return results.count == 0;
+    }
     BOOL insertingIntoEmptyField = (textField.text.length == 0 && range.location == 0 && range.length == 0);
     BOOL hasTextContentType = NO;
     if (@available(iOS 11.0, *)) {
@@ -88,6 +93,7 @@
 - (NSString *)unformattedStringForString:(NSString *)string {
     switch (self.autoformattingBehavior) {
         case STPFormTextFieldAutoFormattingBehaviorNone:
+        case STPFormTextFieldAutoFormattingBehaviorName:
             return string;
         case STPFormTextFieldAutoFormattingBehaviorCardNumbers:
         case STPFormTextFieldAutoFormattingBehaviorPhoneNumbers:
@@ -124,6 +130,7 @@ typedef NSAttributedString* (^STPFormTextTransformationBlock)(NSAttributedString
     self.delegateProxy.autoformattingBehavior = autoFormattingBehavior;
     switch (autoFormattingBehavior) {
         case STPFormTextFieldAutoFormattingBehaviorNone:
+        case STPFormTextFieldAutoFormattingBehaviorName:
         case STPFormTextFieldAutoFormattingBehaviorExpiration:
             self.textFormattingBlock = nil;
             break;
