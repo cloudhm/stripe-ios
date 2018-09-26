@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, STPCardFieldType) {
     STPCardFieldTypeExpiration,
     STPCardFieldTypeCVC,
     STPCardFieldTypePostalCode,
+    STPCardFieldTypeFirstName,
+    STPCardFieldTypeLastName,
 };
 
 @interface STPPaymentCardTextFieldViewModel : NSObject
@@ -33,6 +35,8 @@ typedef NS_ENUM(NSInteger, STPCardFieldType) {
 @property (nonatomic, readwrite, copy, nullable) NSString *postalCodeCountryCode;
 @property (nonatomic, readonly) STPCardBrand brand;
 @property (nonatomic, readonly) BOOL isValid;
+@property (nonatomic, readwrite, copy, nullable) NSString *firstName;
+@property (nonatomic, readwrite, copy, nullable) NSString *lastName;
 
 - (nonnull NSString *)defaultPlaceholder;
 

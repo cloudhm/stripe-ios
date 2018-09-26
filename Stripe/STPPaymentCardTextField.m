@@ -706,6 +706,8 @@ CGFloat const STPPaymentCardTextFieldMinimumPadding = 10;
         case STPCardFieldTypePostalCode:
             textField = self.postalCodeField;
             break;
+        default:
+            break;
     }
     textField.text = nonNilText;
 }
@@ -1052,6 +1054,8 @@ typedef NS_ENUM(NSInteger, STPCardTextFieldState) {
                     }
                 }
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -1269,6 +1273,8 @@ typedef void (^STPLayoutAnimationCompletionBlock)(BOOL completed);
             self.viewModel.postalCode = input.string;
             [self setNeedsLayout];
             break;
+        default:
+            break;
     }
     
     switch (fieldType) {
@@ -1284,6 +1290,8 @@ typedef void (^STPLayoutAnimationCompletionBlock)(BOOL completed);
         case STPCardFieldTypePostalCode:
             return [[NSAttributedString alloc] initWithString:self.viewModel.postalCode
                                                    attributes:self.cvcField.defaultTextAttributes];
+        default:
+            return nil;
     }
 }
 
@@ -1421,6 +1429,8 @@ typedef NS_ENUM(NSInteger, STPFieldEditingTransitionCallSite) {
                 [self.delegate paymentCardTextFieldDidBeginEditingPostalCode:self];
             }
             break;
+        default:
+            break;
     }
     [self updateImageForFieldType:textField.tag];
 }
@@ -1457,6 +1467,8 @@ typedef NS_ENUM(NSInteger, STPFieldEditingTransitionCallSite) {
             if ([self.delegate respondsToSelector:@selector(paymentCardTextFieldDidEndEditingPostalCode:)]) {
                 [self.delegate paymentCardTextFieldDidEndEditingPostalCode:self];
             }
+            break;
+        default:
             break;
     }
 
@@ -1506,6 +1518,8 @@ typedef NS_ENUM(NSInteger, STPFieldEditingTransitionCallSite) {
             return [self.class brandImageForCardBrand:self.viewModel.brand];
         case STPCardFieldTypePostalCode:
             return [self.class brandImageForCardBrand:self.viewModel.brand];
+        default:
+            return nil;
     }
 }
 

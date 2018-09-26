@@ -128,6 +128,22 @@
         case STPCardFieldTypePostalCode:
             return [STPPostalCodeValidator validationStateForPostalCode:self.postalCode
                                                             countryCode:self.postalCodeCountryCode];
+        case STPCardFieldTypeFirstName:
+        {
+            if ([self.firstName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+                return STPCardValidationStateIncomplete;
+            } else {
+                return STPCardValidationStateValid;
+            }
+        }
+        case STPCardFieldTypeLastName:
+         {
+             if ([self.lastName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+                 return STPCardValidationStateIncomplete;
+             } else {
+                 return STPCardValidationStateValid;
+             }
+         }
     }
 }
 
