@@ -71,8 +71,7 @@
  */
 @property (nonatomic, copy, nullable) NSString *currency;
 
-@property (nonatomic, copy, nullable) NSString *firstName;
-@property (nonatomic, copy, nullable) NSString *lastName;
+@property (nonatomic, copy, nullable) NSString *fullname;
 
 
 #pragma mark - Deprecated methods

@@ -24,7 +24,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (self.autoformattingBehavior == STPFormTextFieldAutoFormattingBehaviorName) {
-        NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z]" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSRegularExpression* regularExpression = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z ]" options:NSRegularExpressionCaseInsensitive error:nil];
         NSArray<NSTextCheckingResult*>* results = [regularExpression matchesInString:string options:NSMatchingReportProgress range: NSMakeRange(0, string.length)];
         if (results.count == 0) {
             NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
